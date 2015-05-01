@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if (transform.position.z < 1700) {
 			float newDistance = ball.transform.position.z + distance;
-			transform.position = new Vector3(transform.position.x, transform.position.y, newDistance);
+			transform.position = new Vector3(ball.transform.position.x, transform.position.y, newDistance);
 		}
 	}
 }
