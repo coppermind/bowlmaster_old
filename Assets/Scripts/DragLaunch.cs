@@ -19,8 +19,6 @@ public class DragLaunch : MonoBehaviour {
 		if (!ball.InPlay) {
 			timeStart = Time.time;
 			dragStart = Input.mousePosition;
-			
-			Debug.Log("DragStart()");
 		}
 	}
 	
@@ -38,8 +36,6 @@ public class DragLaunch : MonoBehaviour {
 			float dragDuration = timeEnd - timeStart;
 			float launchSpeedX = (dragEnd.x - dragStart.x) * 0.25f / dragDuration;
 			float launchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration;
-			
-			Debug.Log(launchSpeedX + ", " + launchSpeedZ + ", " + dragDuration);
 			
 			Vector3 velocity = new Vector3(launchSpeedX, 0, launchSpeedZ);
 			ball.Launch(velocity);

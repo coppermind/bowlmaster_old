@@ -3,16 +3,16 @@ using System.Collections;
 
 public class Pin : MonoBehaviour {
 
-	[SerializeField]
-	private float yEventHorizon = -20f;
+//	[SerializeField]
+//	private float yEventHorizon = -20f;
 	
 	[SerializeField]
 	private float standingThreshold = 11.3f;
 	
 	void Update () {
-		if (yEventHorizon > transform.position.y) {
-			Destroy(gameObject);
-		}
+//		if (yEventHorizon > transform.position.y) {
+//			Destroy(gameObject);
+//		}
 	}
 	
 	public bool IsStanding() {
