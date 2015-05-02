@@ -35,20 +35,20 @@ public class Pin : MonoBehaviour {
 	}
 	
 	void Lowering() {
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		if (transform.position != targetPosition) {
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);
 		} else {
 			isLowering = false;
+			Rigidbody rigidbody = GetComponent<Rigidbody>();
 			rigidbody.isKinematic = false;
 			rigidbody.useGravity = true;
 		}
 	}
 
 	public void Raise(float distance) {
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		if (IsStanding()) {
 			targetPosition = new Vector3(transform.position.x, distance, transform.position.z);
+			Rigidbody rigidbody = GetComponent<Rigidbody>();
 			rigidbody.isKinematic = true;
 			rigidbody.useGravity = false;
 			isRaising = true;
@@ -60,6 +60,14 @@ public class Pin : MonoBehaviour {
 			targetPosition = new Vector3(transform.position.x, (transform.position.y-distance), transform.position.z);
 			isLowering = true;
 		}
+	}
+	
+	public void Spawned(float distance) {
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		rigidbody.isKinematic = true;
+		rigidbody.useGravity = false;
+		Vector3 spawnPosition = new Vector3(transform.position.x, (transform.position.y+distance), transform.position.z);
+		transform.position = spawnPosition;
 	}
 	
 	public bool IsStanding() {

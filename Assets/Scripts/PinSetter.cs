@@ -83,9 +83,12 @@ public class PinSetter : MonoBehaviour {
 	
 	public void ResetPins() {
 		PinsFormation formation = GameObject.FindObjectOfType<PinsFormation>();
-		Destroy(formation.gameObject);
+		if (formation) { Destroy(formation.gameObject); }
 		
-		Debug.Log("RestPins()!");
+		formation = Instantiate(pinsFormation, new Vector3(0, 0, 1829), Quaternion.identity) as PinsFormation;
+		foreach (Pin pin in FindObjectsOfType<Pin>()) {
+			pin.Spawned(distanceToRaise);
+		}
 	}
 	
 	public int CountStanding() {
