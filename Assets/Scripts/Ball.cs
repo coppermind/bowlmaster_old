@@ -18,8 +18,6 @@ public class Ball : MonoBehaviour {
 		rigidBody.useGravity = false;
 		
 		startPosition = transform.position;
-		
-		Debug.Log("rotation: " + transform.rotation);
 	}
 	
 	public bool InPlay {

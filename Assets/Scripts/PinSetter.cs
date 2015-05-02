@@ -3,11 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PinSetter : MonoBehaviour {
-
+	
+	public GameObject pinsFormation;
 	public int lastStandingCount = -1;
 
 	[SerializeField]
-	float settleTime = 3f;
+	private float settleTime = 3f;
+	
+	[SerializeField]
+	private float distanceToRaise = 50f;
 
 	private bool ballEnteredBox = false;
 	private float lastChangeTime;
@@ -63,6 +67,25 @@ public class PinSetter : MonoBehaviour {
 		lastStandingCount = -1; // Indicates pins have settled, and ball not in box
 		ballEnteredBox = false;
 		totalText.color = Color.green;
+	}
+	
+	public void RaisePins() {
+		foreach (Pin pin in FindObjectsOfType<Pin>()) {
+			pin.Raise(distanceToRaise);
+		}
+	}
+	
+	public void LowerPins() {
+		foreach (Pin pin in FindObjectsOfType<Pin>()) {
+			pin.Lower(distanceToRaise);
+		}
+	}
+	
+	public void ResetPins() {
+		PinsFormation formation = GameObject.FindObjectOfType<PinsFormation>();
+		Destroy(formation.gameObject);
+		
+		Debug.Log("RestPins()!");
 	}
 	
 	public int CountStanding() {

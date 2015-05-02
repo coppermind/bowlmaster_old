@@ -3,16 +3,63 @@ using System.Collections;
 
 public class Pin : MonoBehaviour {
 
-//	[SerializeField]
-//	private float yEventHorizon = -20f;
-	
 	[SerializeField]
 	private float standingThreshold = 11.3f;
 	
+	[SerializeField]
+	private float moveSpeed = 2f;
+	
+	private Vector3 targetPosition;
+	
+	private bool isRaising = false;
+	private bool isLowering = false;
+	
+	void Start () {
+		//
+	}
+	
 	void Update () {
-//		if (yEventHorizon > transform.position.y) {
-//			Destroy(gameObject);
-//		}
+		if (isRaising) {
+			Raising();
+		} else if (isLowering) {
+			Lowering();
+		}
+	}
+	
+	void Raising() {
+		if (transform.position != targetPosition) {
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);
+		} else {
+			isRaising = false;
+		}
+	}
+	
+	void Lowering() {
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		if (transform.position != targetPosition) {
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);
+		} else {
+			isLowering = false;
+			rigidbody.isKinematic = false;
+			rigidbody.useGravity = true;
+		}
+	}
+
+	public void Raise(float distance) {
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		if (IsStanding()) {
+			targetPosition = new Vector3(transform.position.x, distance, transform.position.z);
+			rigidbody.isKinematic = true;
+			rigidbody.useGravity = false;
+			isRaising = true;
+		}
+	}
+	
+	public void Lower(float distance) {
+		if (IsStanding()) {
+			targetPosition = new Vector3(transform.position.x, (transform.position.y-distance), transform.position.z);
+			isLowering = true;
+		}
 	}
 	
 	public bool IsStanding() {
