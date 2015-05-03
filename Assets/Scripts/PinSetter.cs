@@ -30,7 +30,7 @@ public class PinSetter : MonoBehaviour {
 		totalText.text = CountStanding().ToString();
 		
 		if (ballEnteredBox) {
-			CheckStanding();
+			CheckStandingPins();
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class PinSetter : MonoBehaviour {
 		}
 	}
 	
-	void CheckStanding() {
+	void CheckStandingPins() {
 		int currentStanding = CountStanding();
 		
 		if (currentStanding != lastStandingCount) {

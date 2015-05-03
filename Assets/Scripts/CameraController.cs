@@ -5,17 +5,16 @@ public class CameraController : MonoBehaviour {
 
 	public Ball ball;
 	
-	private float distance;
+	private Vector3 distance;
 	
 	void Start () {
 		ball = FindObjectOfType<Ball>();
-		distance = transform.position.z - ball.transform.position.z;
+		distance = transform.position - ball.transform.position;
 	}
 	
 	void Update () {
 		if (ball.transform.position.z < 1700) {
-			float newDistance = ball.transform.position.z + distance;
-			transform.position = new Vector3(ball.transform.position.x, transform.position.y, newDistance);
+			transform.position = ball.transform.position + distance;
 		}
 	}
 }

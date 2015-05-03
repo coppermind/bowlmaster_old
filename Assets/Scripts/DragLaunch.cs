@@ -4,27 +4,24 @@ using System.Collections;
 [RequireComponent (typeof(Ball))]
 public class DragLaunch : MonoBehaviour {
 
-	private Lane lane;
 	private Ball ball;
 	private float timeStart, timeEnd;
 	private Vector3 dragStart, dragEnd;
 	
 	void Start () {
-		lane = FindObjectOfType<Lane>();
-		
 		ball = GetComponent<Ball>();
+	}
+	
+	public void MoveStart(float amount) {
+		if (!ball.InPlay) {
+			ball.transform.Translate(new Vector3(amount, 0, 0));
+		}
 	}
 	
 	public void DragStart() {
 		if (!ball.InPlay) {
 			timeStart = Time.time;
 			dragStart = Input.mousePosition;
-		}
-	}
-	
-	public void MoveStart(float amount) {
-		if (!ball.InPlay) {
-			ball.transform.Translate(new Vector3(amount, 0, 0));
 		}
 	}
 	
